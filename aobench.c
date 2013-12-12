@@ -4,7 +4,7 @@
  *   https://code.google.com/p/aobench/
  *   real world floating point benchmark
  *
- * $ gcc -std=gnu99 -Wall --pedantic-error -o aobench aobench.c
+ * $ gcc -std=gnu99 -Wall --pedantic-errors -o aobench aobench.c
  */
 #include <stdio.h>
 #include <stdlib.h>
