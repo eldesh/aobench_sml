@@ -1,0 +1,50 @@
+
+SMLSHARP = smlsharp
+ifeq ($(OS),Windows_NT)
+	TARGETS = aobench-smlsharp.exe
+else
+	TARGETS = aobench-smlsharp
+endif
+
+VPATH = .:smlnjlib
+SMLSHARPFLAGS = -I smlnjlib
+
+## source code
+SRCS = random.sml \
+	   packword32big.sml \
+	   realarray.sml \
+	   lib-base.sml \
+	   aobench.sml \
+	   aobench_driver.sml
+
+OBJS = $(filter %.o,$(SRCS:.sml=.o))
+
+## default targets
+all: $(TARGETS)
+
+##
+$(TARGETS): %: aobench_driver.sml $(OBJS)
+	$(SMLSHARP) $(SMLSHARPFLAGS) -o $@ $<
+
+## .o type rules
+%.o: %.sml
+	$(SMLSHARP) $(SMLSHARPFLAGS) -c $<
+
+## generate for SML dependence
+%.d: %.sml
+	@echo "generate [$@] from [$*]"
+	@$(SHELL) -ec '$(SMLSHARP) -MM $(SMLSHARPFLAGS) $< \
+		| sed "s/\($*\)\.o[ :]*/\1.o $@ : /g" > $@; \
+		[ -s $@ ] || rm -rf $@'
+
+ifeq (,$(findstring $(MAKECMDGOALS),clean))
+include $(filter %.d,$(SRCS:.sml=.d))
+endif
+
+.PHONY: clean
+clean:
+	rm -f $(TARGETS)
+	rm -f $(filter %.d,$(SRCS:.sml=.d))
+	rm -f $(addprefix smlnjlib/,$(OBJS))
+	rm -f aobench.o
+

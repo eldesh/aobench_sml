@@ -1,0 +1,9 @@
+_require "basis.smi"
+_require "smlnjlib/random.smi"
+_require "smlnjlib/realarray.smi"
+
+structure AObench =
+struct
+  val main : (string * string list) -> int
+end
+

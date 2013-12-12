@@ -12,6 +12,14 @@ function bench_gcc () {
 	./aobench-c
 }
 
+function bench_sharp () {
+	./aobench-smlsharp aobench-smlsharp.ppm
+}
+
+# comparative criterion
+time for (( i=0; i<10; i++ )); do
+	bench_gcc
+done
 time for (( i=0; i<10; i++ )); do
 	bench_smlnj
 done
@@ -19,7 +27,7 @@ time for (( i=0; i<10; i++ )); do
 	bench_mlton
 done
 time for (( i=0; i<10; i++ )); do
-	bench_gcc
+	bench_smlsharp
 done
 
 

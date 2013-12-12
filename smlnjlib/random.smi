@@ -1,0 +1,20 @@
+_require "basis.smi"
+_require "packword32big.smi"
+_require "lib-base.smi"
+_require "random-sig.sml"
+
+structure Random =
+struct
+    type rand (= boxed)
+
+    val rand : (int * int) -> rand
+
+    val toString : rand -> string
+    val fromString : string -> rand
+
+    val randInt : rand -> int
+    val randNat : rand -> int
+    val randReal : rand -> real
+    val randRange : (int * int) -> rand -> int
+end
+

@@ -5,8 +5,15 @@
  *
  * MLton
  * $ mlton aobench.mlb
+ *
+ * SML#
+ * $ make -f makefile-smlsharp
  *)
-structure AObench =
+structure AObench :
+sig
+  val main : (string * string list) -> int
+end
+=
 struct
   type range = { begin : int, limit : int, step : int -> int }
 
