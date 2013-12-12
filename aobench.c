@@ -60,13 +60,16 @@ static void print_vec (vec v) {
 	printf ("vec={x=%5.3lf, y=%5.3lf, z=%5.3lf}", v.x, v.y, v.z);
 }
 
-static void print_ray(Ray ray) {
+static void print_ray(Ray ray) __attribute__ ((unused));
+static void print_isect(Isect isect) __attribute__ ((unused));
+
+void print_ray(Ray ray) {
 	printf ("{ org="); print_vec(ray.org);
 	printf (", dir="); print_vec(ray.dir);
 	printf ("}");
 }
 
-static void print_isect(Isect isect) {
+void print_isect(Isect isect) {
 	printf ("isect{t=%5.3lf, ", isect.t);
 	print_vec(isect.p);
 	printf (", ");
@@ -364,7 +367,7 @@ main(int argc, char **argv)
 
     render(img, WIDTH, HEIGHT, NSUBSAMPLES);
 
-    saveppm("ao.ppm", WIDTH, HEIGHT, img); 
+    saveppm(argc==2 ? argv[1] : "ao.ppm", WIDTH, HEIGHT, img); 
 
     return 0;
 }
