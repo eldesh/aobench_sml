@@ -1,49 +1,57 @@
 #!/bin/bash
 
-function bench_smlnj () {
-	sml @SMLload=aobench-image aobench-nj.ppm
+function bench () {
+	case "$1" in
+	sml)
+		sml @SMLload=aobench-image aobench-sml.ppm
+		;;
+	gcc | mlton | smlsharp)
+		./aobench-${1} aobench-${1}.ppm
+		;;
+	*)
+		echo "unkown compiler [$1]"
+		;;
+	esac
 }
 
-function bench_mlton () {
-	./aobench-mlton aobench-mlton.ppm
+function build () {
+	case "$1" in
+	sml)
+		ml-build aobench.cm AObench.main aobench-image
+		;;
+	gcc)
+		gcc -std=gnu99 -O2 -Wall --pedantic-errors -o aobench-gcc aobench.c -lm
+		;;
+	mlton)
+		mlton -output aobench-mlton aobench.mlb
+		;;
+	smlsharp)
+		make -f makefile-smlsharp
+		;;
+	*)
+		echo "unkown compiler [$1]"
+		;;
+	esac
 }
 
-function bench_gcc () {
-	./aobench-c aobench-c.ppm
-}
-
-function bench_smlsharp () {
-	./aobench-smlsharp aobench-smlsharp.ppm
-}
 
 # number of iteration
 N=3
 
-# comparative criterion
-which gcc >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-	gcc -std=gnu99 -O2 -Wall --pedantic-errors -o aobench-c aobench.c -lm
-	time for (( i=0; i<$N; i++ )); do bench_gcc; done
-fi
-echo ""
-
-which sml >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-	ml-build aobench.cm AObench.main aobench-image
-	time for (( i=0; i<$N; i++ )); do bench_smlnj; done
-fi
-echo ""
-
-which mlton >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-	mlton -output aobench-mlton aobench.mlb
-	time for (( i=0; i<$N; i++ )); do bench_mlton; done
-fi
-echo ""
-
-which smlsharp >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-	make -f makefile-smlsharp
-	time for (( i=0; i<$N; i++ )); do bench_smlsharp; done
-fi
+compiler=(gcc sml mlton smlsharp)
+for (( i=0; i<${#compiler[@]}; i++ ))
+do
+	# check existence
+	which ${compiler[$i]} >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		build ${compiler[$i]}
+		echo "${compiler[$i]} is running"
+		time for (( j=0; j<$N; j++ ))
+		do
+			bench ${compiler[$i]}
+		done
+	else
+		echo "${compiler[$i]} is not found :("
+	fi
+done
 
