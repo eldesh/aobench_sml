@@ -5,7 +5,7 @@ aobench - SML
 what is this
 -------------------------------
 
-Ported [aobench](http://code.google.com/p/aobench/) program to SML.
+Ported [aobench](http://code.google.com/p/aobench/) program to StandardML.
 
 > aoench is a small ambient occlusion renderer for benchmarking realworld floating point performance in various languages. 
 
@@ -19,10 +19,8 @@ this script compile and run aobench program automatically with timing measuremen
 $ ./meta-aobench.sh
 ```
 
-If the benchmark is succeeded, you can see the result of programs as *aobench-xxx.ppm* .
-*ppm* is very simple picture format.
-You can convert *ppm* to *png". e.g. *pnmtopng"
-
+If the benchmark succeed, you will see the result of programs as _aobench-xxx.ppm_.
+ppm is a very simple picture format. You can convert ppm to popular format with converter such as pnmtopng.
 
 supported compiler
 -------------------------------
