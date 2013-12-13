@@ -36,7 +36,7 @@ function build () {
 
 
 # number of iteration
-N=3
+N=1
 
 compiler=(gcc sml mlton smlsharp)
 for (( i=0; i<${#compiler[@]}; i++ ))
