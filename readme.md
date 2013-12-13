@@ -2,6 +2,8 @@
 aobench - SML
 ===============================
 
+![title](title.png "generated with smlsharp")
+
 what is this
 -------------------------------
 
