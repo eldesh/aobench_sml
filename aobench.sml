@@ -290,7 +290,7 @@ struct
       write_str fp "P6\n";
       write_str fp (Int.toString w^" "^Int.toString h^"\n");
       write_str fp "255\n";
-      Word8Array.app (fn a=> BinIO.output1 (fp, a)) img;
+      BinIO.output (fp, Word8Array.vector img);
       BinIO.closeOut fp
     end
 
