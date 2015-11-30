@@ -1,0 +1,26 @@
+
+POLYML ?= poly
+POLYMLC ?= polyc
+
+SRC := aobench.sml $(wildcard smlnjlib/*.sml)
+
+all: aobench-poly
+
+
+aobench-poly.o: export.sml $(SRC) smlnjlib/ml_bind.sml
+	$(POLYML) -q --error-exit < export.sml
+
+
+aobench-poly: aobench-poly.o
+	$(POLYMLC) -o $@ $^
+
+
+run: aobench-poly
+	./aobench-poly aobench-poly.ppm
+
+
+PHOENY: clean
+clean:
+	$(RM) aobench-poly
+	$(RM) aobench-poly.o
+

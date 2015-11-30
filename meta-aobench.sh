@@ -5,7 +5,7 @@ function bench () {
 	sml)
 		sml @SMLload=aobench-image aobench-sml.ppm
 		;;
-	gcc | mlton | smlsharp)
+	gcc | mlton | smlsharp | poly)
 		./aobench-${1} aobench-${1}.ppm
 		;;
 	*)
@@ -28,6 +28,9 @@ function build () {
 	smlsharp)
 		make -f makefile-smlsharp
 		;;
+	poly)
+		make -f makefile-poly
+		;;
 	*)
 		echo "unkown compiler [$1]"
 		;;
@@ -38,7 +41,7 @@ function build () {
 # number of iteration
 N=1
 
-compiler=(gcc sml mlton smlsharp)
+compiler=(gcc sml mlton smlsharp poly)
 for (( i=0; i<${#compiler[@]}; i++ ))
 do
 	# check existence

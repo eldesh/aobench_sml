@@ -8,6 +8,9 @@
  *
  * SML#
  * $ make -f makefile-smlsharp
+ *
+ * Poly/ML
+ * $ make -f makefile-polyml
  *)
 structure AObench :
 sig
@@ -182,7 +185,10 @@ struct
 
   (* smlnj-lib *)
   local
-    val rand = Random.rand (48271, valOf Int.maxInt)
+    (* Poly/ML's Int has not a max value.
+     * Specify max value of Int31.
+     *)
+    val rand = Random.rand (48271, Option.getOpt (Int.maxInt, 1073741823))
   in
   fun drand48 () = Random.randReal rand
   end

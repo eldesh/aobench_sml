@@ -31,6 +31,7 @@ supported compiler
 - [SML/NJ][1]
 - [MLton][2]
 - [SML#][3]
+- [Poly/ML][4]
 
 license
 -------------------------------
@@ -41,5 +42,5 @@ this is distributed unser the [New BSD](http://opensource.org/licenses/BSD-3-Cla
 [1]: http://www.smlnj.org/
 [2]: http://mlton.org/
 [3]: http://www.pllab.riec.tohoku.ac.jp/smlsharp/
-
+[4]: http://www.polyml.org/
 
