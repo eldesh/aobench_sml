@@ -259,6 +259,7 @@ render(unsigned char *img, int w, int h, int nsubsamples)
     int u, v;
 
     double *fimg = (double *)malloc(sizeof(double) * w * h * 3);
+    if (fimg == NULL) exit(EXIT_FAILURE);
     memset((void *)fimg, 0, sizeof(double) * w * h * 3);
 
     for (y = 0; y < h; y++) {
@@ -312,7 +313,7 @@ render(unsigned char *img, int w, int h, int nsubsamples)
             img[3 * (y * w + x) + 2] = clamp(fimg[3 *(y * w + x) + 2]);
         }
     }
-
+    free(fimg);
 }
 
 void
@@ -369,5 +370,6 @@ main(int argc, char **argv)
 
     saveppm(argc==2 ? argv[1] : "ao.ppm", WIDTH, HEIGHT, img); 
 
+    free(img);
     return 0;
 }
