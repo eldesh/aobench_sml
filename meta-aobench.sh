@@ -5,7 +5,7 @@ function bench () {
 	sml)
 		sml @SMLload=aobench-image aobench-sml.ppm
 		;;
-	gcc | mlton | smlsharp | poly)
+	gcc | mlton | mlkit | smlsharp | poly)
 		./aobench-${1} aobench-${1}.ppm
 		;;
 	*)
@@ -25,6 +25,9 @@ function build () {
 	mlton)
 		mlton -output aobench-mlton aobench.mlb
 		;;
+	mlkit)
+		mlkit -output aobench-mlkit aobench-mlkit.mlb
+		;;
 	smlsharp)
 		make -f makefile-smlsharp
 		;;
@@ -41,7 +44,7 @@ function build () {
 # number of iteration
 N=1
 
-compiler=(gcc sml mlton smlsharp poly)
+compiler=(gcc sml mlton mlkit smlsharp poly)
 for (( i=0; i<${#compiler[@]}; i++ ))
 do
 	# check existence

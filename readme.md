@@ -32,6 +32,7 @@ supported compiler
 - [MLton][2]
 - [SML#][3]
 - [Poly/ML][4]
+- [MLKit][5]
 
 license
 -------------------------------
@@ -43,4 +44,5 @@ this is distributed unser the [New BSD](http://opensource.org/licenses/BSD-3-Cla
 [2]: http://mlton.org/
 [3]: http://www.pllab.riec.tohoku.ac.jp/smlsharp/
 [4]: http://www.polyml.org/
+[5]: http://www.elsman.com/mlkit/
 

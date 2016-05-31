@@ -1,0 +1,12 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  smlnjlib/lib-base-sig.sml
+  smlnjlib/lib-base.sml
+  smlnjlib/random-sig.sml
+  smlnjlib/random.sml
+  smlnjlib/RealArray.sml
+in
+  aobench.sml
+  aobench_driver.sml
+end
+
