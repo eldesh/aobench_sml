@@ -51,13 +51,18 @@ do
 	which ${compiler[$i]} >/dev/null 2>&1
 	if [ $? -eq 0 ]; then
 		build ${compiler[$i]}
+		if [ $? -ne 0 ]; then
+			echo "building with ${compiler[$i]} failed" >&2
+			continue
+		fi
+
 		echo "${compiler[$i]} is running"
 		time for (( j=0; j<$N; j++ ))
 		do
 			bench ${compiler[$i]}
 		done
 	else
-		echo "${compiler[$i]} is not found :("
+		echo "${compiler[$i]} is not found :(" >&2
 	fi
 done
 
