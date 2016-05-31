@@ -9,7 +9,7 @@ what is this
 
 Ported [aobench](http://code.google.com/p/aobench/) program to StandardML.
 
-> aoench is a small ambient occlusion renderer for benchmarking realworld floating point performance in various languages. 
+> aobench is a small ambient occlusion renderer for benchmarking realworld floating point performance in various languages.
 
 how to use
 -------------------------------
