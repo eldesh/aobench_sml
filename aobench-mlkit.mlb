@@ -4,7 +4,7 @@ local
   smlnjlib/lib-base.sml
   smlnjlib/random-sig.sml
   smlnjlib/random.sml
-  smlnjlib/RealArray.sml
+  smlnjlib/realarray.sml
 in
   aobench.sml
   aobench_driver.sml
