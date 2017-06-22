@@ -7,7 +7,7 @@ else
 endif
 
 VPATH = .:smlnjlib
-SMLSHARPFLAGS = -I smlnjlib
+SMLSHARPFLAGS = -I smlnjlib -O3
 
 ## source code
 SRCS = random.sml \
@@ -47,4 +47,3 @@ clean:
 	rm -f $(filter %.d,$(SRCS:.sml=.d))
 	rm -f $(addprefix smlnjlib/,$(OBJS))
 	rm -f aobench.o
-
