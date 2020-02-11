@@ -1,0 +1,10 @@
+local
+	$(SML_LIB)/basis/basis.mlb
+	$(SML_LIB)/smlnj-lib/Util/smlnj-lib.mlb
+	$(SML_LIB)/basis/fork-join.mlb
+	aobench-mpl.sml
+	aobench_driver.sml
+in
+	structure AObench
+end
+

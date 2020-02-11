@@ -8,6 +8,9 @@ function bench () {
 	gcc | mlton | mlkit | smlsharp | poly)
 		./aobench-${1} aobench-${1}.ppm
 		;;
+	mpl)
+		./aobench-${1} @mpl procs 4 set-affinity -- aobench-${1}.ppm 4
+		;;
 	*)
 		echo "unkown compiler [$1]"
 		;;
@@ -34,6 +37,9 @@ function build () {
 	poly)
 		make -f makefile-poly
 		;;
+	mpl)
+		mpl -output aobench-mpl aobench-mpl.mlb
+		;;
 	*)
 		echo "unkown compiler [$1]"
 		;;
@@ -44,7 +50,7 @@ function build () {
 # number of iteration
 N=1
 
-compiler=(gcc sml mlton mlkit smlsharp poly)
+compiler=(gcc sml mlton mlkit smlsharp poly mpl)
 for (( i=0; i<${#compiler[@]}; i++ ))
 do
 	# check existence
