@@ -1,10 +1,5 @@
 (**
- * Parallelized AObench with parallel-for
- *
- * MaPLe (an implementation of ParallelML)
- * $ mpl aobench-mpl.mlb
- *
- * SML# 3.5.0
+ * SML#
  * $ make -f makefile-smlsharp
  *)
 structure AObench :
@@ -28,6 +23,7 @@ struct
     end
 
   fun succ x = x + 1
+
 
   val (WIDTH, HEIGHT) = (256, 256)
   val (NSUBSAMPLES, NAO_SAMPLES) = (2, 8)

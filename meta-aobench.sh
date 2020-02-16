@@ -5,8 +5,15 @@ function bench () {
 	sml)
 		sml @SMLload=aobench-image aobench-sml.ppm
 		;;
-	gcc | mlton | mlkit | smlsharp | poly)
+	gcc | mlton | mlkit | poly)
 		./aobench-${1} aobench-${1}.ppm
+		;;
+	smlsharp)
+		if [ -n "$2" ]; then
+			MYTH_NUM_WORKERS=$2 ./aobench-${1}-par aobench-${1}-par.ppm 4
+		else
+			./aobench-${1} aobench-${1}.ppm
+		fi
 		;;
 	mpl)
 		./aobench-${1} @mpl procs 4 set-affinity -- aobench-${1}.ppm 4
@@ -67,6 +74,13 @@ do
 		do
 			bench ${compiler[$i]}
 		done
+
+		if [ ${compiler[$i]} = smlsharp ]; then
+			time for (( j=0; j<$N; j++ ))
+			do
+				bench smlsharp 4
+			done
+		fi
 	else
 		echo "${compiler[$i]} is not found :(" >&2
 	fi
