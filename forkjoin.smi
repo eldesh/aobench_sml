@@ -1,0 +1,9 @@
+_require "basis.smi"
+_require "thread.smi"
+_require "forkjoin.sig"
+
+structure ForkJoin =
+struct
+  val parfor: int -> int * int -> (int -> unit) -> unit
+end
+

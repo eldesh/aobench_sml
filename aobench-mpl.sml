@@ -1,8 +1,11 @@
 (**
- * AObench extended for MaPLe (an implementation of ParallelML)
+ * Parallelized AObench with parallel-for
  *
- * MaPLe
+ * MaPLe (an implementation of ParallelML)
  * $ mpl aobench-mpl.mlb
+ *
+ * SML# 3.5.0
+ * $ make -f makefile-smlsharp
  *)
 structure AObench :
 sig

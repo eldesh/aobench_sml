@@ -3,28 +3,34 @@ SMLSHARP = smlsharp
 ifeq ($(OS),Windows_NT)
 	TARGETS = aobench-smlsharp.exe
 else
-	TARGETS = aobench-smlsharp
+	TARGETS = aobench-smlsharp aobench-smlsharp-par
 endif
 
 VPATH = .:smlnjlib
 SMLSHARPFLAGS = -I smlnjlib -O3
 
 ## source code
-SRCS = random.sml \
-	   packword32big.sml \
-	   realarray.sml \
-	   lib-base.sml \
-	   aobench.sml \
-	   aobench_driver.sml
+SRCS := \
+	random.sml             \
+	packword32big.sml      \
+	realarray.sml          \
+	lib-base.sml           \
+	forkjoin.sml           \
+	aobench_driver.sml     \
+	aobench_driver-par.sml \
+	aobench.sml            \
+	aobench-mpl.sml
 
 OBJS = $(filter %.o,$(SRCS:.sml=.o))
+
 
 ## default targets
 all: $(TARGETS)
 
+
 ##
-$(TARGETS): %: aobench_driver.sml $(OBJS)
-	$(SMLSHARP) $(SMLSHARPFLAGS) -o $@ $<
+$(TARGETS): %: $(OBJS)
+	$(SMLSHARP) $(SMLSHARPFLAGS) -o $@ $(subst -smlsharp,_driver,$@).smi
 
 ## .o type rules
 %.o: %.sml
@@ -43,7 +49,7 @@ endif
 
 .PHONY: clean
 clean:
-	rm -f $(TARGETS)
-	rm -f $(filter %.d,$(SRCS:.sml=.d))
-	rm -f $(addprefix smlnjlib/,$(OBJS))
-	rm -f aobench.o
+	$(RM) $(TARGETS)
+	$(RM) $(filter %.d,$(SRCS:.sml=.d))
+	$(RM) $(addprefix smlnjlib/,$(OBJS))
+	$(RM) $(OBJS)
